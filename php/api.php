@@ -86,7 +86,8 @@ class api
         foreach (FILES_INFO as $item) {
             if (!$item) continue;
             if (!file_exists(APP_PATH . $item)) {
-                return json(['code' => -1, 'msg' => $item . ' 文件不存在']);
+                #return json(['code' => -1, 'msg' => $item . ' 文件不存在']);
+                echo $item." 文件不存在\n";
             }
             $no[$item] = [];
         }
@@ -97,7 +98,7 @@ class api
 
             $replace = require LANG_PATH . $item . '.php';
 
-            $content = file_get_contents(APP_PATH . $item);
+            $content = @file_get_contents(APP_PATH . $item);
             foreach ($replace as $k2 => $v2) {
 
                 // 将不存在的显示出来
@@ -123,13 +124,15 @@ class api
             }
 
 
-            if (!file_put_contents(APP_PATH . $item, $content)) {
-                return json(['code' => -1, 'msg' => '汉化' . $item . '失败']);
+            if (!@file_put_contents(APP_PATH . $item, $content)) {
+                #return json(['code' => -1, 'msg' => '汉化' . $item . '失败']);
+                echo $item." 汉化失败\n";
             }
 
         }
 
-        return json(['code' => 1, 'msg' => '汉化成功', 'no' => $no]);
+        #return json(['code' => 1, 'msg' => '汉化成功', 'no' => $no]);
+        echo "汉化成功：-------------------------------\_/\n".implode("\n",array_keys($no));
     }
 
     /**

@@ -1,8 +1,8 @@
 @echo off
 
 set BACK_PATH=%cd%
-set INSTALL_DERIVE=D:
-set INSTALL_PATH=%INSTALL_DERIVE%\APP\Network\Postman\Install\
+set INSTALL_DERIVE=C:
+set INSTALL_PATH=%USERPROFILE%\AppData\Local\Postman\
 set VERSION=%1%
 set NOW_DERIVE=%~d0
 
